@@ -1,0 +1,7 @@
+/*
+
+!.devcontainer/
+!.github/
+!src/
+!.clang-format
+!.gitignore
