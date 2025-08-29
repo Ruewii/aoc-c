@@ -1,7 +1,5 @@
-/*
+.vscode
 
-!.devcontainer/
-!.github/
-!src/
-!.clang-format
-!.gitignore
+*.so
+aoc
+src/inputs
