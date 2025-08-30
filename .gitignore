@@ -1,5 +1,12 @@
+# editor files
 .vscode
 
+# wildcards
 *.so
+*.txt
+
+# binaries
 aoc
-src/inputs
+
+# directories
+lib/
