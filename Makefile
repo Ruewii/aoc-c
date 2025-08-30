@@ -1,16 +1,31 @@
-CC = gcc
-LDFLAGS = -ldl
+# Flags
 
-SOL_SRCS := $(wildcard src/solutions/*/*.c)
-SOL_LIBS := $(SOL_SRCS:.c=.so)
+CC 		   = gcc
+LDFLAGS    = -ldl -Wl,-rpath=./lib
+CFLAGS	   = -fPIC -Isrc -Wl,-rpath=./lib
 
-all: aoc $(SOL_LIBS)
+# Sources
 
-aoc: src/main.c
-	$(CC) -o $@ $< $(LDFLAGS)
+SOL_SRCS  := $(wildcard src/solutions/*/*.c)	# match all .c in solutions
+SOL_LIBS  := $(SOL_SRCS:.c=.so) 				# replace all .c above to .so and match solutions target
+UTIL_SRCS := $(wildcard src/utils/*.c)			# match all .c utils
 
-src/solutions/%.so: src/solutions/%.c
-	$(CC) -shared -o $@ $<
+# Libraries
+
+UTIL_LIB  := lib/libutils.so
+
+# Scripts
+
+all: aoc $(UTIL_LIB) $(SOL_LIBS)
+
+aoc: src/main.c $(UTIL_LIB)
+	$(CC) -o $@ $< -Llib -lutils $(LDFLAGS)
+
+$(UTIL_LIB): $(UTIL_SRCS)
+	$(CC) -shared -o $@ $? $(CFLAGS)
+
+src/solutions/%.so: src/solutions/%.c $(UTIL_LIB)
+	$(CC) -shared -o $@ $< -Llib -lutils $(CFLAGS)
 
 clean:
-	rm -f aoc $(SOL_LIBS)
+	rm -f aoc $(SOL_LIBS) $(UTIL_LIB)
