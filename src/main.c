@@ -22,13 +22,12 @@ char *load_input(const char *filename) {
 }
 
 int main(int argc, char **argv) {
-    if (argc < 3) {
-        printf("Usage: %s <day> <part>\n", argv[0]);
+    if (argc < 2) {
+        printf("Usage: %s <day>\n", argv[0]);
         return 1;
     }
 
     int day = atoi(argv[1]);
-    int part = atoi(argv[2]);
 
     // find solutions
     char *soldir = "src/solutions";
@@ -57,13 +56,13 @@ int main(int argc, char **argv) {
     }
 
     if (solname == NULL) {
-        fprintf(stderr, "solution does not exist: %d-%d", day, part);
+        fprintf(stderr, "solution does not exist: %d", day);
         return 1;
     }
 
     // build paths
     char solpath[256], inpath[256];
-    snprintf(solpath, sizeof(solpath), "src/solutions/%s/%d.so", solname, part);
+    snprintf(solpath, sizeof(solpath), "src/solutions/%s/module.so", solname);
     snprintf(inpath, sizeof(inpath), "src/inputs/%s.txt", solname);
 
     // loads input
