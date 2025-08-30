@@ -13,3 +13,8 @@ i dont know which version, just install whatever's latest.
 | year | day | status |
 | ---- | --- | ------ |
 | 2024 | 01  | 🟡 wip  |
+
+### todo
+ - [x] create a simple framework
+ - [x] over-complicate things
+ - [ ] actually solve the puzzle
