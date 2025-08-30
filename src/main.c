@@ -76,10 +76,10 @@ int main(int argc, char **argv) {
     }
 
     // declare function pointer type
-    void (*solve)(const char *);
+    void (*solve)(char *);
 
     // load function reference to solve
-    solve = (void (*)(const char *))dlsym(handle, "solve");
+    solve = (void (*)(char *))dlsym(handle, "solve");
     if (!solve) {
         fprintf(stderr, "dlsym error: %s\n", dlerror());
         dlclose(handle);
