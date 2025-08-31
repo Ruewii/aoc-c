@@ -2,12 +2,6 @@
 
 #include <stdlib.h>
 
-typedef struct {
-    char **data;
-    int length;  // used
-    int size;    // allocated
-} StringArray;
-
 void init(StringArray *arr) {
     arr->length = 0;
     arr->size = 4;
