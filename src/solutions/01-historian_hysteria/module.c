@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "headers/utils/trim.h"
+#include "headers/utils/strings.h"
 
 void solve(char *input) {
     const char *delimeter = "\n";
