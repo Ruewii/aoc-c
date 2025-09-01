@@ -25,3 +25,15 @@ void push(StringArray *arr, char *s) {
     arr->data[arr->length++] = s;
     arr->data[arr->length] = NULL;
 }
+
+void *get(StringArray *arr, int i) {
+    if (i < 0 || i >= arr->length) return NULL;
+    return arr->data[i];
+}
+
+void destroy(StringArray *arr) {
+    free(arr->data);
+    arr->data = NULL;
+    arr->length = 0;
+    arr->size = 0;
+}

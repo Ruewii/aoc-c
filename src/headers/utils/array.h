@@ -11,4 +11,8 @@ void init(StringArray *arr);
 
 void push(StringArray *arr, char *s);
 
+void *get(StringArray *arr, int i);
+
+void destroy(StringArray *arr);
+
 #endif
