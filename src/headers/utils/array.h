@@ -1,10 +1,10 @@
 #ifndef ARRAY_H
 #define ARRAY_H
 
-typedef struct {
+typedef struct StringArray {
     char **data;
-    int length;
-    int size;
+    int length;  // amount of data stored, excluding the NULL terminator
+    int size;    // total size / capacity
 } StringArray;
 
 void init(StringArray *arr);
