@@ -1,8 +1,8 @@
 # Flags
 
 CC 		   = gcc
-LDFLAGS    = -ldl -Wl,-rpath=./lib
-CFLAGS	   = -fPIC -Isrc -Wl,-rpath=./lib
+CFLAGS	   = -fPIC -Isrc -Werror
+LDFLAGS    = -Llib -lutils -Wl,-rpath=./lib -ldl
 
 # Sources
 
@@ -10,7 +10,7 @@ SOL_SRCS  := $(wildcard src/solutions/*/*.c)	# match all .c in solutions
 SOL_LIBS  := $(SOL_SRCS:.c=.so) 				# replace all .c above to .so and match solutions target
 UTIL_SRCS := $(wildcard src/utils/*.c)			# match all .c utils
 
-# Libraries
+# Shared objects
 
 UTIL_LIB  := lib/libutils.so
 
