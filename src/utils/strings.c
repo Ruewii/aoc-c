@@ -23,8 +23,6 @@ char **split(char *str, char sep) {
     StringArray arr;
     init(&arr);
 
-    trim(str);
-
     int b = 0;  // boundary
     for (int i = 0; str[i] != '\0'; i++) {
         char c = str[i];
