@@ -27,5 +27,8 @@ $(UTIL_LIB): $(UTIL_SRCS)
 src/solutions/%.so: src/solutions/%.c $(UTIL_LIB)
 	$(CC) -shared -o $@ $< -Llib -lutils $(CFLAGS)
 
+test: src/test.c $(UTIL_LIB)
+	$(CC) -o $@ $< -Llib -lutils $(CFLAGS) $(LDFLAGS)
+
 clean:
 	rm -f aoc $(SOL_LIBS) $(UTIL_LIB)
