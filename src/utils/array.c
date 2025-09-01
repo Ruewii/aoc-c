@@ -4,14 +4,24 @@
 
 void init(StringArray *arr) {
     arr->length = 0;
-    arr->size = 4;
+    arr->size = 16;
     arr->data = malloc(arr->size * sizeof(char *));
+    if (arr->data == NULL) {
+        arr->size = 0;
+        return;
+    }
+    arr->data[0] = NULL;
 }
 
 void push(StringArray *arr, char *s) {
-    if (arr->length == arr->size) {
+    if (arr->length + 1 == arr->size) {
         arr->size *= 2;
-        arr->data = realloc(arr->data, arr->size * sizeof(char *));
+        char **nalloc = realloc(arr->data, arr->size * sizeof(char *));
+        if (nalloc == NULL) {
+            return;
+        }
+        arr->data = nalloc;
     }
     arr->data[arr->length++] = s;
+    arr->data[arr->length] = NULL;
 }
