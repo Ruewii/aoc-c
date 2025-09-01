@@ -1,9 +1,10 @@
+#include "headers/utils/strings.h"
+
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "headers/utils/strings.h"
 #include "headers/utils/array.h"
 
 char *slice(const char *str, int start, int end) {
