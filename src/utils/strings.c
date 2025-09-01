@@ -23,17 +23,16 @@ char **split(char *str, char sep) {
     StringArray arr;
     init(&arr);
 
-    int b = 0;  // boundary
+    int boundary = 0;
     for (int i = 0; str[i] != '\0'; i++) {
-        char c = str[i];
-        if (c == sep) {
-            push(&arr, slice(str, b, i));
-            b = i + 1;
+        if (str[i] == sep) {
+            push(&arr, slice(str, boundary, i));
+            boundary = i + 1;
         }
     }
 
-    push(&arr, slice(str, b, strlen(str)));  // push last token
-    push(&arr, NULL);                        // push terminator
+    push(&arr, slice(str, boundary, strlen(str)));  // push last token
+    push(&arr, NULL);                               // push terminator
 
     return arr.data;
 }
@@ -49,4 +48,3 @@ char *trim(char *str) {
     end[1] = '\0';
     return str;
 }
-
