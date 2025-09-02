@@ -18,3 +18,8 @@ i dont know which version, just install whatever's latest.
  - [x] create a simple framework
  - [x] over-complicate things
  - [ ] actually solve the puzzle
+
+### api
+ - [x] arrays
+ - [x] strings
+ - [x] sorter
