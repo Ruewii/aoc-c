@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
     // build paths
     char solpath[256], inpath[256];
     snprintf(solpath, sizeof(solpath), "src/solutions/%s/module.so", solname);
-    snprintf(inpath, sizeof(inpath), "src/inputs/%s.txt", solname);
+    snprintf(inpath, sizeof(inpath), "inputs/%s.txt", solname);
 
     // loads input
     char *input = load_input(inpath);
