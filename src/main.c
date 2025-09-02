@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
     int day = atoi(argv[1]);
 
     // find solutions
-    char *soldir = "src/solutions";
+    char *soldir = "../src/solutions";
     struct dirent *e;
     DIR *dr = opendir(soldir);
 
@@ -64,8 +64,9 @@ int main(int argc, char **argv) {
 
     // build paths
     char solpath[256], inpath[256];
-    snprintf(solpath, sizeof(solpath), "src/solutions/%s/module.so", solname);
-    snprintf(inpath, sizeof(inpath), "inputs/%s.txt", solname);
+    snprintf(solpath, sizeof(solpath), "../src/solutions/%s/module.so",
+             solname);
+    snprintf(inpath, sizeof(inpath), "../inputs/%s.txt", solname);
 
     // loads input
     char *input = load_input(inpath);
