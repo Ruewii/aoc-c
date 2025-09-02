@@ -16,19 +16,23 @@ UTIL_LIB  := lib/libutils.so
 
 # Scripts
 
-all: aoc $(UTIL_LIB) $(SOL_LIBS)
+main: bin/aoc $(UTIL_LIB) $(SOL_LIBS)
 
-aoc: src/main.c $(UTIL_LIB)
+test: bin/test
+
+# Macros
+
+bin/aoc: src/main.c $(UTIL_LIB)
 	$(CC) -o $@ $< -Llib -lutils $(LDFLAGS)
+
+bin/test: src/test.c $(UTIL_LIB)
+	$(CC) -o $@ $< -Llib -lutils $(CFLAGS) $(LDFLAGS)
 
 $(UTIL_LIB): $(UTIL_SRCS)
 	$(CC) -shared -o $@ $? $(CFLAGS)
 
 src/solutions/%.so: src/solutions/%.c $(UTIL_LIB)
 	$(CC) -shared -o $@ $< -Llib -lutils $(CFLAGS)
-
-test: src/test.c $(UTIL_LIB)
-	$(CC) -o $@ $< -Llib -lutils $(CFLAGS) $(LDFLAGS)
 
 clean:
 	rm -f aoc $(SOL_LIBS) $(UTIL_LIB)
