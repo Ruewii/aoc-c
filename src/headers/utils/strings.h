@@ -1,9 +1,11 @@
 #ifndef STRINGS_H
 #define STRINGS_H
 
+#include "array.h"
+
 char *slice(const char *str, int start, int end);
 
-char **split(char *str, char sep);
+StringArray split(const char *str, char sep);
 
 char *trim(char *str);
 

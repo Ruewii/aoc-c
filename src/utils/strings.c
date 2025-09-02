@@ -20,7 +20,7 @@ char *slice(const char *str, int start, int end) {
     return out;
 }
 
-char **split(char *str, char sep) {
+StringArray split(const char *str, char sep) {
     StringArray arr;
     init(&arr);
 
