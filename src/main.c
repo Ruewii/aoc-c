@@ -7,7 +7,8 @@
 char *load_input(const char *filename) {
     FILE *f = fopen(filename, "r");  // open file from filename as read only
     if (!f) {
-        perror("open input");
+        // perror("failed to load input file");
+        fprintf(stderr, "failed to load input file: %s\n", filename);
         exit(1);
     }
     fseek(f, 0, SEEK_END);  // stream full
@@ -35,8 +36,9 @@ int main(int argc, char **argv) {
     DIR *dr = opendir(soldir);
 
     if (dr == NULL) {
-        fprintf(stderr, "opendir error: could not open the directory %s\n",
-                soldir);
+        // perror("could not find solution directory");
+        fprintf(stderr, "could not find solution dir: %s\n", soldir);
+        return 1;
     }
 
     char *solname;
