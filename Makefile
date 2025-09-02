@@ -1,38 +1,43 @@
 # Flags
 
 CC 		   = gcc
-CFLAGS	   = -fPIC -Isrc -Werror
-LDFLAGS    = -Llib -lutils -Wl,-rpath=./lib -ldl
+CFLAGS	   = -Isrc -Werror						# include src/ as include search path, warn as error
+LDFLAGS    = -Llib -lutils -ldl 				# include lib/ as link search path, add libutils
 
 # Sources
 
 SOL_SRCS  := $(wildcard src/solutions/*/*.c)	# match all .c in solutions
-SOL_LIBS  := $(SOL_SRCS:.c=.so) 				# replace all .c above to .so and match solutions target
+SOL_LIBS  := $(SOL_SRCS:.c=.so)					# replace all .c above to .so and match solutions target
 UTIL_SRCS := $(wildcard src/utils/*.c)			# match all .c utils
-
-# Shared objects
-
-UTIL_LIB  := lib/libutils.so
+UTIL_LIB  := lib/libutils.a						# static lib path
+UTIL_LIBS := $(UTIL_SRCS:.c=.o)					# replace all .c to .o
 
 # Scripts
 
-main: bin/aoc $(UTIL_LIB) $(SOL_LIBS)
+main: bin/aoc libs sols
 
 test: bin/test
+
+libs: $(UTIL_LIBS) $(UTIL_LIB)
+
+sols: $(SOL_LIBS)
 
 # Macros
 
 bin/aoc: src/main.c $(UTIL_LIB)
-	$(CC) -o $@ $< -Llib -lutils $(LDFLAGS)
+	$(CC) -o $@ $< $(LDFLAGS) $(CFLAGS)
 
 bin/test: src/test.c $(UTIL_LIB)
-	$(CC) -o $@ $< -Llib -lutils $(CFLAGS) $(LDFLAGS)
+	$(CC) -o $@ $< $(LDFLAGS) $(CFLAGS)
 
-$(UTIL_LIB): $(UTIL_SRCS)
-	$(CC) -shared -o $@ $? $(CFLAGS)
+$(UTIL_LIB): $(UTIL_LIBS)
+	ar -rcs $@ $^
+
+src/utils/%.o: src/utils/%.c
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 src/solutions/%.so: src/solutions/%.c $(UTIL_LIB)
 	$(CC) -shared -o $@ $< -Llib -lutils $(CFLAGS)
 
 clean:
-	rm -f aoc $(SOL_LIBS) $(UTIL_LIB)
+	rm -f bin/* lib/* $(SOL_LIBS) $(UTIL_LIBS)
