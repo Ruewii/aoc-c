@@ -24,18 +24,27 @@ char **split(char *str, char sep) {
     StringArray arr;
     init(&arr);
 
-    int boundary = 0;
-    for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] == sep) {
-            push(&arr, slice(str, boundary, i));
-            boundary = i + 1;
-        }
+    int b = 0;  // boundary
+    int c = 0;  // cursor
+    while (str[c] != '\0') {
+        // skip leading separators
+        while (str[c] != '\0' && str[b] == sep) b++;
+
+        // oh it's the end of string? break.
+        if (str[b] == '\0') break;
+        c = b;
+
+        // scan until next sep or end
+        while (str[c] != '\0' && str[c] != sep) c++;
+
+        // slice if not empty
+        if (c > b) push(&arr, slice(str, b, c));
+
+        // boundary skip after separator
+        b = c + 1;
     }
 
-    push(&arr, slice(str, boundary, strlen(str)));  // push last token
-    push(&arr, NULL);                               // push terminator
-
-    return arr.data;
+    return arr;
 }
 
 char *trim(char *str) {
