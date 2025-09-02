@@ -2,7 +2,7 @@
 
 CC 		   = gcc
 CFLAGS	   = -Isrc -Werror						# include src/ as include search path, warn as error
-LDFLAGS    = -Llib -lutils		 				# include lib/ as link search path, add libutils
+LDFLAGS    = -Llib -lutils				 		# include lib/ as link search path, add libutils
 
 # Sources
 
@@ -34,10 +34,10 @@ $(UTIL_LIB): $(UTIL_LIBS)
 	ar -rcs $@ $^
 
 src/utils/%.o: src/utils/%.c
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -fPIC -o $@ $< $(CFLAGS)
 
 src/solutions/%.so: src/solutions/%.c $(UTIL_LIB)
-	$(CC) -shared -o $@ $< $(CFLAGS) $(LDFLAGS)
+	$(CC) -shared -fPIC -o $@ $< $(CFLAGS) $(LDFLAGS)
 
 clean:
 	rm -f bin/* lib/* $(SOL_LIBS) $(UTIL_LIBS)
