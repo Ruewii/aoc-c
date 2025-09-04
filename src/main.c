@@ -17,7 +17,7 @@ char *load_input(const char *filename) {
 
     char *buf = malloc(size + 1);  // create buffer for file
     fread(buf, 1, size, f);        // read chunks to *buf
-    buf[size] = '\0';              // add NULL terminator for safety
+    buf[size] = '\0';              // add NULL terminator
     fclose(f);                     // close handle
     return buf;
 }
