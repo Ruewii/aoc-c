@@ -24,7 +24,7 @@ void solve(char *input) {
 
     int count = 0;
 
-    while (*input != '\0') {
+    while (*input) {
         nums_a[count] = strtol(input, &input, 10);
         while (*input == ' ' || *input == '\n') input++;
         if (*input == '\0') break;
