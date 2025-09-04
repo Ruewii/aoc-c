@@ -13,8 +13,7 @@ int cmp_int(const void *a, const void *b) { return *(int *)a - *(int *)b; }
 
 void solve(char *input) {
     // debug purposes
-    FILE *fptr;
-    fptr = fopen("logs/debug.1.log", "w");
+    FILE *fptr = fopen("logs/debug.1.log", "w");
     if (!fptr) {
         printf("can't save log file: %s\n", strerror(errno));
     }
